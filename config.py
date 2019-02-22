@@ -100,9 +100,9 @@ JOB_TEMPLATE = {
             '/home/sashab1/ship/shared:/shared'
         ],
         'cpu_needed':
-        1,
+        2,
         'max_memoryMB':
-        1024,
+        2000,
         'min_memoryMB':
         512,
         'run_id':
@@ -115,10 +115,10 @@ JOB_TEMPLATE = {
         '''muons_{job_id}_16.root '''
         '''--results /output/result.json '''
         '''--hists /output/hists_{IMAGE_TAG}_'''
-        '''{params}_{job_id}_{sampling}_{seed}.root --seed {seed}' ''',
+        '''{job_id}_{sampling}_{seed}.root --seed {seed}' ''',
     },
     'required_outputs': {
-        'output_uri': 'eos:/eos/experiment/ship/skygrid/histograms_raw',
+        'output_uri': 'eos:/eos/experiment/ship/skygrid/ffedotov/{job_id}/histograms_raw',
         'file_contents': [{
             'file': 'result.json',
             'to_variable': 'result'

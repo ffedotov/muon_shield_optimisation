@@ -55,7 +55,7 @@ def generate(
     phiRandom = False  # only relevant for muon background generator
     followMuon = True  # only transport muons for a fast muon only background
 
-    print 'FairShip setup to produce', nEvents, 'events'
+    print ('FairShip setup to produce', nEvents, 'events')
     r.gRandom.SetSeed(theSeed)
     ship_geo = ConfigRegistry.loadpy(
         '$FAIRSHIP/geometry/geometry_config.py',
@@ -82,17 +82,17 @@ def generate(
         nEvents = MuonBackgen.GetNevents()
     else:
         nEvents = min(nEvents, MuonBackgen.GetNevents())
-    print 'Process ', nEvents, ' from input file, with Phi random=', phiRandom
+    print ('Process ', nEvents, ' from input file, with Phi random=', phiRandom)
     if followMuon:
         modules['Veto'].SetFastMuon()
     run.SetGenerator(primGen)
     run.SetStoreTraj(r.kFALSE)
     run.Init()
-    print 'Initialised run.'
+    print ('Initialised run.')
     geomGeant4.setMagnetField()
-    print 'Start run of {} events.'.format(nEvents)
+    print ('Start run of {} events.'.format(nEvents))
     run.Run(nEvents)
-    print 'Finished simulation of {} events.'.format(nEvents)
+    print ('Finished simulation of {} events.'.format(nEvents))
 
 
 def main():
@@ -206,7 +206,7 @@ def main():
             )
         tmpl['error'] = None
         tmpl['status'] = 'Done.'
-    except RuntimeError, e:
+    except RuntimeError as e:
         tmpl['error'] = e.__repr__()
     finally:
         with open(args.results, 'w') as f:

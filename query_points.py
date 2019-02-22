@@ -4,12 +4,12 @@ import pandas as pd
 import numpy as np
 
 from disneylandClient import ListJobsRequest, new_client
-from disney_optimize import ProcessPoints, FilterPoints
+from disney_EA_Reduced_Space_Evaluation import ProcessPoints, FilterPoints
 from config import IMAGE_TAG
 
 stub = new_client()
 all_points = stub.ListJobs(ListJobsRequest(kind='point', how_many=0)).jobs
-points = FilterPoints(all_points, seed='all', sampling='all')
+points = FilterPoints(all_points, seed=1, sampling=37)
 X, y = ProcessPoints(points)
 ids = [job.id for job in points]
 metadata = pd.DataFrame.from_dict(
