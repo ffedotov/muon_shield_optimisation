@@ -64,8 +64,12 @@ def get_result(jobs):
         var = [o for o in json.loads(job.output)
                if o.startswith("variable")][0]
         result = json.loads(var.split("=", 1)[1])
+        print ('Result (tracing):')
+        print (result)
         if result['error']:
             raise Exception(result['error'])
+            print ('Got error')
+            print (result['error'])
         results.append(result)
 
     # Only one job per machine calculates the weight and the length
@@ -101,6 +105,7 @@ def CreateJobInput(point, number, sampling, seed):
             job_id=number+1,
             IMAGE_TAG=IMAGE_TAG
         )
+    job['required_outputs']['output_uri'] = job['required_outputs']['output_uri'].format(job_id=number+1)
 
     return json.dumps(job)
 
@@ -170,9 +175,9 @@ def main():
     if args.point:
         point = common.ParseParams(args.point)
     else:
-        space = common.CreateDiscreteSpace()
-        point = common.AddFixedParams(space.rvs()[0])
-
+#        space = common.CreateDiscreteSpace()
+#        point = common.AddFixedParams(space.rvs()[0])
+         print('baba')   
     print("result:", CalculatePoint(point, seed=args.seed, sampling=args.sampling, tag=tag, verbose=True))
 
 
