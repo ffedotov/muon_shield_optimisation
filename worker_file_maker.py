@@ -81,6 +81,7 @@ def check_path(path, local):
 
 
 def main():
+    print ('Hell-o')
     pool = Pool(
         processes=min(args.njobs, cpu_count()))
     assert check_path('{}/worker_files'.format(args.workDir), args.local)
